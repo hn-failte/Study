@@ -1,0 +1,33 @@
+{
+  "name": "node-study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "my-cmd": "node ./cmd.js"
+  },
+  "scripts": {
+    "test": "http-server",
+    "stop": "taskkill /IM node.exe /F",
+    "start": "npm test",
+    "restart": "npm stop",
+    "build": "webpack --config webpack.config.js",
+    "rebuild": "npm stop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "chalk": "^3.0.0",
+    "commander": "^4.1.0",
+    "jquery": "^3.4.1",
+    "ora": "^4.0.3"
+  },
+  "exports": {
+    "./esmodule": "./esmodule"
+  }
+}

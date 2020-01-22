@@ -1,0 +1,16 @@
+{
+  "name": "node-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "Failte<failte@163.com>",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0"
+  }
+}

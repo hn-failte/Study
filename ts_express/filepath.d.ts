@@ -1,0 +1,3 @@
+interface FilePath {
+    index: string
+}
