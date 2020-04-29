@@ -12,17 +12,26 @@
 
 // iterator(ge);
 
-const states = [];
-function await(promise) {
-  if (!promise instanceof Promise) return Promise.resolve();
-  const prev = states[states.length - 1];
-  states.push(ge.next(val));
-  console.log(states);
-  return prev.value;
+function iterator(ge, val) {
+  if (!ge.next) return;
+  let { value, done } = ge.next(val);
+  return done || iterator(ge, value);
+}
+
+function* await(promise) {
+  if (promise instanceof Promise) {
+    promise;
+  } else {
+    return promise;
+  }
 }
 
 function async(func) {
-  console.log(func.toString());
+  let str = func.toString();
+  str = str.replace("function", "function*");
+  str = str.replace(/\Wawait/g, " (yield) ");
+  const gen = eval(`(${str})()`);
+  iterator(gen)
 }
 
 async(function() {
