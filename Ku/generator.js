@@ -1,5 +1,34 @@
+// Generator yield前后位置的作用Demo1
+
+// function* func() {
+//   let a = yield "a";
+//   console.log(a)
+// }
+// let ge = func();
+// ge.next()
+// let d = ge.next(1);
+// console.log(d);
+
+// Generator yield前后位置的作用Demo2
+
+// function fun2() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(3);
+//     }, 3000);
+//   });
+// }
+// function* promiseGe() {
+//   let val = yield fun2();
+//   console.log(val);
+// }
+// let ge = promiseGe();
+// ge.next().value.then(res => ge.next(res));
+
+// Generator的基本使用
+
 // const ge = (function*() {
-//   let a = yield "aaa";
+//   let a = yield ("aaa");
 //   let b = yield "bbb";
 //   console.log(a, b);
 // })();
@@ -12,26 +41,26 @@
 
 // iterator(ge);
 
-function iterator(ge, val) {
-  if (!ge.next) return;
-  let { value, done } = ge.next(val);
-  return done || iterator(ge, value);
+// Gnerator仿async/await
+
+function iterator(gen, value) {
+  if (!gen.next) return;
+  let res = gen.next(value);
+  value = res.value;
+  return res.done || value.then(res => iterator(gen, res));
 }
 
-function* await(promise) {
-  if (promise instanceof Promise) {
-    promise;
-  } else {
-    return promise;
-  }
+function await(promise) {
+  return promise instanceof Promise ? promise : Promise.resolve(promise);
 }
 
 function async(func) {
+    if()
   let str = func.toString();
   str = str.replace("function", "function*");
-  str = str.replace(/\Wawait/g, " (yield) ");
+  str = str.replace(/\Wawait/g, " yield ");
   const gen = eval(`(${str})()`);
-  iterator(gen)
+  iterator(gen);
 }
 
 async(function() {
@@ -52,54 +81,3 @@ async(function() {
   );
   console.log(b);
 });
-
-//
-
-// function await(promise) {}
-
-// function fun2() {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(3);
-//     }, 3000);
-//   });
-// }
-// async function asyncFun() {
-//   let awaitVal = await fun2();
-//   console.log(awaitVal);
-//   return awaitVal;
-// }
-
-// function doGe(ge, cb) {
-//   if (!ge.next) return;
-//   let { value, done } = ge.next();
-//   cb(value);
-//   return done || doGe(ge, cb);
-// }
-
-//
-
-// function fun2() {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(3);
-//     }, 3000);
-//   });
-// }
-// function* promiseGe() {
-//   let val = yield fun2();
-//   console.log(val);
-// }
-// let ge = promiseGe();
-// ge.next().value.then(res => ge.next(res));
-
-//
-
-// function* func() {
-//   let a = yield "a";
-//   console.log(a)
-// }
-// let ge = func();
-// ge.next()
-// let d = ge.next(1);
-// console.log(d);
