@@ -1,3 +1,0 @@
-interface FilePath {
-    index: string
-}
