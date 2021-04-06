@@ -1,5 +1,6 @@
 const { SyncWaterfallHook } = require("../lib");
 
+// 同步流水线 Hook
 const hooks = new SyncWaterfallHook(["arg1", "arg2", "arg3"]);
 
 hooks.tap("a", (a, b, c) => {

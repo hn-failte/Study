@@ -1,7 +1,7 @@
-const { AsyncParallelHook } = require("../lib");
+const { AsyncSeriesHook } = require("../lib");
 
-// 并行的异步 Hook
-const hooks = new AsyncParallelHook(["params"]);
+// 异步串行 Hook
+const hooks = new AsyncSeriesHook(["params"]);
 
 hooks.tapPromise("a", () => {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ hooks.tapPromise("a", () => {
 });
 
 hooks.tapPromise("b", () => {
-  // a、b 同步执行，b 会先完成
+  // 先执行完 a 后，才会执行 b
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("hooks b");
