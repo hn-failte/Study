@@ -1,9 +1,9 @@
-const { SyncBailHook } = require('tapable')
+const { SyncBailHook } = require('../lib')
 
 const hooks = new SyncBailHook(['params'])
 
-hooks.tap('a', () => {
-    console.log('hooks a')
+hooks.tap('a', (params) => {
+    console.log('hooks a', params)
     return void 0
 })
 hooks.tap('b', () => {
@@ -15,6 +15,4 @@ hooks.tap('c', () => {
     console.log('hooks c')
 })
 
-hooks.call('start', () => {
-    console.log('done')
-})
+hooks.call('start')
