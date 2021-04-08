@@ -7,6 +7,7 @@ let count = 0;
 
 hooks.tap("a", (arg) => {
   console.log("a", arg, count);
+  // 在返回 undefined 后，该 tap 不会再自己执行（可以被后续的 tap 触发被动执行）
   return void 0;
 });
 
