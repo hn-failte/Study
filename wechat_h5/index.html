@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">root</div>
+    <input type="file" accept="image/" capture="camera" multiple="true" />
+    <input type="file" accept="video/" capture="camcorder" />
+    <input type="file" accept="audio/*" capture="microphone" />
+    <script src="./request.js"></script>
+    <script>
+      function onBridgeReady() {
+        WeixinJSBridge.call("hideOptionMenu");
+      }
+
+      if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+          document.addEventListener(
+            "WeixinJSBridgeReady",
+            onBridgeReady,
+            false
+          );
+        } else if (document.attachEvent) {
+          document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+          document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+        }
+      } else {
+        onBridgeReady();
+      }
+    </script>
+    <script>
+      jsonp({
+        url: "http://10.8.60.7:10086/jsonp",
+        data: {
+          username: "failte",
+          password: "123456",
+        },
+      }).then((res) => {
+        document.getElementById("root").innerText = res.username;
+      });
+    </script>
+  </body>
+</html>
