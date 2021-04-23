@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>wecaht_h5</title>
   </head>
   <body>
-    <div id="root">root</div>
-    <input type="file" accept="image/" capture="camera" multiple="true" />
-    <input type="file" accept="video/" capture="camcorder" />
-    <input type="file" accept="audio/*" capture="microphone" />
+    <div id="root">
+      <input type="file" accept="image/" capture="camera" multiple="true" />
+      <input type="file" accept="video/" capture="camcorder" />
+      <input type="file" accept="audio/*" capture="microphone" />
+    </div>
     <script src="./request.js"></script>
     <script>
+      // 微信 h5 页面去除分享功能
       function onBridgeReady() {
         WeixinJSBridge.call("hideOptionMenu");
       }
