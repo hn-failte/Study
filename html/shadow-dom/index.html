@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple DOM example</title>
+  </head>
+  <body>
+    <section id="sdom">shadow dom</section>
+    <aside id="ggg">ggg</aside>
+    <script>
+      const sdom = document.getElementById("sdom");
+      const shadow = sdom.attachShadow({ mode: "open" });
+      const div = document.createElement("div");
+      div.id = "ddd";
+      div.innerText = "div";
+      const style = document.createElement("style");
+      // 仅内部的样式才能影响其样式
+      style.textContent = `
+        #ddd {
+          background: orange;
+          font-size: 16px;
+          color: white;
+        }
+      `;
+      shadow.appendChild(style);
+      shadow.appendChild(div);
+      // shadow dom内部的状态和外部不共享
+      const ddd = document.getElementById("ddd");
+      console.log(ddd);
+    </script>
+    <style>
+      /* shadow dom的样式不会收到外部的样式影响 */
+      #ddd,
+      #ggg {
+        color: lightgreen;
+        background: gray;
+      }
+    </style>
+  </body>
+</html>

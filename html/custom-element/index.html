@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>custom element</title>
+  </head>
+  <body>
+    <main></main>
+    <script>
+      class MyInput extends HTMLElement {
+        myName = "my-input";
+        value = "";
+        oninput = () => {};
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: "open" });
+          const input = document.createElement("input");
+          const div = document.createElement("div");
+          input.oninput = (e) => {
+            const value = e.target.value;
+            this.value = value;
+            this.oninput(value);
+            div.innerText = value;
+          };
+          shadow.appendChild(input);
+          shadow.appendChild(div);
+        }
+      }
+      customElements.define("my-input", MyInput);
+      function getValue(e) {
+        const ip = document.getElementById("ip");
+        console.log(ip.value);
+      }
+    </script>
+    <my-input id="ip" oninput="getValue()"></my-input>
+  </body>
+</html>

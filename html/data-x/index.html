@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义属性</title>
+  </head>
+  <body>
+    <main
+      data-failte="ccc"
+      failte="failte"
+      class="demo"
+      id="demo"
+      data-failte2="d"
+    >
+      <div data-ddd="ddd"></div>
+    </main>
+    <script>
+      const main = document.getElementsByTagName("main")[0];
+      console.log(main.dataset);
+      console.log(main.failte);
+      console.log(main.getAttribute("failte"));
+    </script>
+  </body>
+</html>
