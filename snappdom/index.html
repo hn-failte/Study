@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app"></div>
     <script type="module">
-        import { h, init, toVNode, classModule, styleModule } from './node_modules/snabbdom/build/snabbdom.esm.js';
-        const patch = init([classModule, styleModule]);
-        const main = h('div#main', { index: 0, key: 'app' }, h('div', 'div1'));
-        patch(toVNode(document.querySelector("#app")), main);
+      import {
+        h,
+        init,
+        toVNode,
+        classModule,
+        styleModule,
+        propsModule,
+        eventListenersModule,
+      } from "./node_modules/snabbdom/build/snabbdom.esm.js";
+      const patch = init([
+        classModule,
+        styleModule,
+        propsModule,
+        eventListenersModule,
+      ]);
+      const app = document.querySelector("#app");
+      const createComponent = (text) => {
+        const el = h(
+          "div#main",
+          {
+            index: 0,
+            key: "app",
+            on: {
+              click: () => {
+                // 后面的新的虚拟dom将会更新旧的虚拟dom，并更新视图
+                patch(el, createComponent("new"));
+              },
+            },
+          },
+          h("div", text)
+        );
+        return el;
+      };
+      const main = createComponent("demo");
+      // 先将dom转换为虚拟dom，再用节点替换该dom
+      patch(toVNode(app), main);
     </script>
-</body>
+  </body>
 </html>
