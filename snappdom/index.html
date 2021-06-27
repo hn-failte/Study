@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>snabbdom</title>
+    <style>
+      .blue {
+        color: blue;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -31,6 +36,12 @@
           {
             index: 0,
             key: "app",
+            class: {
+              blue: true,
+            },
+            style: {
+              textAlign: "center",
+            },
             on: {
               click: () => {
                 // 后面的新的虚拟dom将会更新旧的虚拟dom，并更新视图
@@ -38,7 +49,25 @@
               },
             },
           },
-          h("div", text)
+          [
+            h(
+              "div",
+              {
+                props: { text },
+              },
+              text
+            ),
+            h(
+              "a",
+              {
+                props: {
+                  href: "https://www.baidu.com/",
+                  title: "baidu",
+                },
+              },
+              text
+            ),
+          ]
         );
         return el;
       };
