@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const div = document.createElement("div");
+      const createSvg = (text) => {
+        return `
+            <svg width="36px" height="26px" viewBox="0 0 36 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>删除</title>
+                <g id="3.11-现场检查" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="2.-部位－标记户型图" transform="translate(-237.000000, -473.000000)">
+                        <g id="内容" transform="translate(-25.000000, 316.000000)">
+                            <g id="删除" transform="translate(262.000000, 157.000000)">
+                                <path d="M4,22 C1.790861,22 2.705415e-16,20.209139 0,18 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 L32,0 C34.209139,-4.05812251e-16 36,1.790861 36,4 L36,18 C36,20.209139 34.209139,22 32,22 L20,22 L18.4472136,25.1055728 C18.323719,25.3525621 18.0233825,25.4526742 17.7763932,25.3291796 C17.6796295,25.2807978 17.6011683,25.2023365 17.5527864,25.1055728 L16,22 L4,22 Z" id="形状结合" fill="#000000" opacity="0.800000012"></path>
+                                <text font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="6" y="15">${text}</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        `;
+      };
+      div.innerHTML = createSvg("del");
+      document.body.appendChild(div);
+    </script>
+  </body>
+</html>
