@@ -1,23 +1,10 @@
+// 异步变转换同步
+
 const deasync = require("deasync");
+const fs = require('fs');
+const readFile = deasync(fs.readFile);
 
-const func = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log(1);
-      resolve(1);
-    }, 1000);
-  })
-    .then(
-      (res) => {
-        console.log(res);
-        return res;
-      },
-      (rej) => rej
-    )
-    .catch((err) => console.log(err));
-
-const defunc = deasync(func);
-
-console.log(0);
-defunc();
-console.log(2);
+console.log('start');
+const content = readFile('./package.json', 'utf8');
+console.log(content);
+console.log('end');
