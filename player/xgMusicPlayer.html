@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
-    <meta name="referrer" content="no-referrer">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"
+    />
+    <meta name="referrer" content="no-referrer" />
     <title>播放器</title>
   </head>
   <body>
     <div id="mse"></div>
     <script src="//unpkg.byted-static.com/xgplayer/2.9.6/browser/index.js" charset="utf-8"></script>
-    <script src="//unpkg.byted-static.com/xgplayer-mp4/1.1.8/browser/index.js" charset="utf-8"></script>
+    <script
+      src="//unpkg.byted-static.com/xgplayer-mp4/1.1.8/browser/index.js"
+      charset="utf-8"
+    ></script>
     <script type="text/javascript">
       let player = new window.Music({
-          id: 'mse',
-          url: [{src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3', name: '林宥嘉·脆弱一分钟', poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg'}],
-          volume: 0.8,
-          width: window.innerWidth,
-          height: 50
-      });
-      player.crossOrigin = "anonymous";
+        id: 'mse',
+        url: [
+          {
+            src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3',
+            name: '林宥嘉·脆弱一分钟',
+            poster:
+              '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg'
+          }
+        ],
+        volume: 0.8,
+        width: window.innerWidth,
+        height: 50
+      })
+      player.crossOrigin = 'anonymous'
     </script>
   </body>
 </html>
