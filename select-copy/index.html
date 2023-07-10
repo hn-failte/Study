@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"><span>hello</span><span> </span><span>world!</span></p>
+    <button onclick="handleClick()">handleClick</button>
+    <script>
+      function handleClick() {
+        console.log('handleClick')
+        var range = document.createRange()
+        var p1 = document.getElementById('p1')
+        // range.selectNodeContents(p1.children[0])
+        // range.selectNodeContents(p1)
+        const selection = document.getSelection()
+        // selection.addRange(range)
+        selection.selectAllChildren(p1)
+        // range.selectNodeContents(p1)
+        // range.setStart(p1, 0)
+        // range.setEnd(p1, 2)
+      }
+    </script>
+  </body>
+</html>

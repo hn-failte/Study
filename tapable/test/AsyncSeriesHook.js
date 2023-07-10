@@ -3,16 +3,20 @@ const { AsyncSeriesHook } = require("../lib");
 // 异步串行 Hook
 const hooks = new AsyncSeriesHook(["params"]);
 
-hooks.tapPromise("a", () => {
+hooks.tap('0', (args) => {
+  console.log('0', args)
+})
+
+hooks.tapPromise("a", (args) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("hooks a");
-      resolve();
+      resolve('a');
     }, 1000);
   });
 });
 
-hooks.tapPromise("b", () => {
+hooks.tapPromise("b", (args) => {
   // 先执行完 a 后，才会执行 b
   return new Promise((resolve, reject) => {
     setTimeout(() => {
