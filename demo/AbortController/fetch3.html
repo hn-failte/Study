@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>fetch 请求频繁请求</div>
+    <button id="download">download+++</button>
+    <button id="abort">abort</button>
+    <script>
+        let controller
+        const url = "https://artifact-master.zego.cloud/generic/industry_web/public/golive/zego-express-docsview-electron.tgz?version=v1.0.0_gh";
+
+        const downloadBtn = document.getElementById("download");
+        const abortBtn = document.getElementById("abort");
+
+        downloadBtn.addEventListener("click", handleRequest);
+
+        abortBtn.addEventListener("click", handleAbort);
+
+        function handleAbort() {
+            if (controller) {
+                controller.abort();
+                console.log("请求中止");
+            }
+        }
+
+        function handleRequest() {
+            handleAbort()
+            controller = new AbortController();
+            fetch(url, { signal: controller.signal })
+                .then((response) => response.blob())
+                .catch((err) => {
+                    console.error(`请求错误：${err.message}`);
+                });
+        }
+    </script>
+</body>
+</html>

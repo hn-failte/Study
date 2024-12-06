@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>组合信号</div>
+    <button id="btn">click</button>
+    <button id="btn2">click2</button>
+    <button id="abort">abort</button>
+    <script>
+        const controller = new AbortController();
+        const autoController = new AbortController();
+        const signal = AbortSignal.any([controller.signal, autoController.signal]);
+
+        const handleClick = () => {
+            console.log('click')
+        }
+        const handleClick2 = () => {
+            console.log('click2')
+        }
+        const abort = () => {
+            // 替换多个取消监听事件
+            controller.abort();
+        }
+
+        document.getElementById('btn').addEventListener('click', handleClick, { signal });
+        document.getElementById('btn2').addEventListener('click', handleClick2, { signal });
+        document.getElementById('abort').addEventListener('click', abort);
+
+        setTimeout(() => {
+            autoController.abort()
+        }, 5000)
+    </script>
+</body>
+</html>

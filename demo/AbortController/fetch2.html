@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>fetch 请求超时中止</div>
+    <button id="download">download</button>
+    <script>
+        const url = "https://artifact-master.zego.cloud/generic/industry_web/public/golive/zego-express-docsview-electron.tgz?version=v1.0.0_gh";
+
+        document.getElementById("download").addEventListener("click", handleRequest);
+
+        function handleRequest() {
+            fetch(url, { signal: AbortSignal.timeout(1000) })
+                .then((response) =>  response.blob())
+                .catch((err) => {
+                    console.error(`请求错误：${err.message}`);
+                });
+        }
+    </script>
+</body>
+</html>

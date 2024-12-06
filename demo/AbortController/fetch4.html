@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>fetch 请求超时中止</div>
+    <button id="download">download</button>
+    <button id="abort">abort</button>
+    <script>
+        const url = "https://artifact-master.zego.cloud/generic/industry_web/public/golive/zego-express-docsview-electron.tgz?version=v1.0.0_gh";
+
+        const controller = new AbortController();
+        let signal
+
+        document.getElementById("download").addEventListener("click", handleRequest);
+        document.getElementById("abort").addEventListener("click", handleAbort);
+
+        function handleRequest() {
+            signal = AbortSignal.any([controller.signal, AbortSignal.timeout(3000)])
+            fetch(url, { signal })
+                .then((response) =>  response.blob())
+                .catch((err) => {
+                    console.error(`请求错误：${err.message}`);
+                });
+        }
+
+        function handleAbort() {
+            controller.abort();
+            console.log("请求主动中止");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div>流写入底层依赖</div>
+  <button id="write">write</button>
+  <button id="cancel">cancel</button>
+
+  <script>
+    const stream = new WritableStream({
+        write(chunk, controller) {
+            console.log('写入 chunk:', chunk);
+
+            controller.signal.addEventListener('abort', () => {
+                console.log('取消写入 chunk');
+            });
+        },
+        close() {
+            console.log('写入完成');
+        },
+        abort(reason) {
+            console.warn('终止写入:', reason);
+        }
+    });
+
+    const writer = stream.getWriter();
+
+    const handleWrite = () => {
+        // 模拟写入
+        writer.write('数据块1');
+        writer.write('数据块2');
+        writer.releaseLock(); // 释放写锁后将会保存
+    }
+
+    const handleCancel = async () => {
+        await writer.abort();
+        console.log('取消写入');
+    }
+
+    document.getElementById('write').addEventListener('click', handleWrite)
+    document.getElementById('cancel').addEventListener('click', handleCancel);
+  </script>
+</body>
+</html>
