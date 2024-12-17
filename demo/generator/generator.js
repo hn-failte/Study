@@ -1,42 +1,13 @@
-// Generator yield前后位置的作用Demo1
-
+// Generator yield 前后位置的作用
 function* func() {
-  let a = yield "a";
-  console.log(a);
-}
-let ge = func();
-ge.next();
-let d = ge.next(1);
-console.log(d);
-
-// Generator yield前后位置的作用Demo2
-
-function fun2() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(3);
-    }, 3000);
-  });
-}
-function* promiseGe() {
-  let val = yield fun2();
-  console.log(val);
-}
-let ge = promiseGe();
-ge.next().value.then((res) => ge.next(res));
-
-// Generator的基本使用
-
-const ge = (function* () {
-  let a = yield "aaa";
-  let b = yield "bbb";
-  console.log(a, b);
-})();
-
-function iterator(ge, val) {
-  if (!ge.next) return;
-  let { value, done } = ge.next(val);
-  return done || iterator(ge, value);
+  const ge_params1 = yield "a";
+  console.log('ge ge_params1', ge_params1);
 }
 
-iterator(ge);
+const ge = func();
+
+const ge_result1 = ge.next();
+console.log('ge ge_result1', ge_result1);
+
+const ge_result2 = ge.next(1);
+console.log('ge ge_result2', ge_result2);
